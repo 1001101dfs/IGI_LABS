@@ -1,0 +1,20 @@
+{% extends 'main/layout2.html' %}
+
+{%block title%}Заказ{% endblock %}
+
+{% block сontent %}
+    <p>Выберите интересующие вас услуги</p>
+    <form method="post">
+        {% csrf_token %}
+        <ul>
+            {% for el in job %}
+
+                <li>
+                    <input type="checkbox" name="records" value="{{ el.id }}">
+                    {{ el.text }} - {{ el.cost }}р
+                </li>
+            {% endfor %}
+        </ul>
+        <button type="submit">Сделать заказ</button>
+    </form>
+{% endblock %}

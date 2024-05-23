@@ -1,0 +1,65 @@
+{% extends 'main/layout.html' %}
+
+{%block title%}Главная страница{% endblock %}
+
+{% block сontent %}
+    <h1>Главная страница</h1>
+    <h1>Наши услуги</h1>
+    <a href="?order=asc">Сортировать по возрастанию</a> |
+    <a href="?order=desc">Сортировать по убыванию</a>
+    <ul>
+        {% for el in elements %}
+            <li>
+                <p>{{el.text}} - {{el.cost}}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    <h1>График</h1>
+    <canvas id="myChart" width="400" height="400"></canvas>
+    <script>
+        // Данные для графика
+        const data = {
+            labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь'],
+            datasets: [{
+                label: 'Продажи',
+                data: [120, 190, 90, 150, 70, 50],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Конфигурация графика
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Отрисовка графика
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+{% endblock %}
